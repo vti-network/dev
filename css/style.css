@@ -1,65 +1,146 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,500;1,200&display=swap');
 
 :root {
-    --pr:brown;
+  --header : #f89604;
+  --pr:linear-gradient(45deg, #ffcc00d0, #f89604);
 }
-
+*{
+  font-family: 'Poppins', sans-serif;
+}
 /* Reset some default styles */
-body, h1, p {
-    margin: 0 auto;
-    padding: 0;
-    font-family: 'Roboto Condensed', sans-serif;
+body {
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  padding: 80px 0;
+  background: linear-gradient(45deg, #ffcc00d0, #f89604);
 }
 
-body {
-    /* background: linear-gradient(to right, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700, #ffd700); */
-    background: linear-gradient(45deg, #ffcc00d0, #f89604);
-    color: #333;
-    text-align: center;
-    padding: 80px 0;
+/* container */
+.container {
+  margin: 0 auto;
+  width: 100%;
 }
 
 .flagID {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-image: url(./img/bgq.jpg), url(./img/another-bg.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.kotak {
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-    color: gray;
-    
-}
-article {
-    margin-left: 10px;
-    margin-right: 5px;
-    margin-bottom: 100px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan dengan warna dan intensitas tertentu */
-    padding: 20px; /* Menambahkan padding agar bayangan tidak terpotong */
-    margin: 20px; /* Menambahkan margin agar elemen terlihat lebih jelas */
-    border-radius: 8px;
-}
-
-article h1 {
-    color: #f89604;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
 }
 
 
+
+/* navbar */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--header);
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: gray;
+  font-size: 1.5em;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.nav-links li {
+  margin-right: 20px;
+}
+
+ a {
+  text-decoration: none;
+  color: gray;
+  font-weight: bold;
+  font-size: 1;
+  margin-left: 5px;
+
+}
+ a:hover {
+  text-decoration: none;
+  color: rgb(245, 244, 244);
+}
+
+
+/* input */
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  margin-left: 10px;
+  position: relative;
+}
+
+.futuristic-input {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #ffcc00d0;
+  background-color: transparent;
+  outline: none;
+  color: white;
+  transition: border-bottom-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  border-radius: 0; /* Optional: Removes input border-radius */
+  flex: 1; /* Take up remaining space in the container */
+}
+
+.futuristic-input::placeholder {
+  color: #95a5a6;
+}
+
+.futuristic-input:focus {
+  border-bottom-color: black;
+  color: black;
+}
+
+.futuristic-button {
+  margin-left: -40px; /* Adjust the margin as needed */
+  /* padding: 10px 20px; */
+  /* background-color: #ffcc00d0; */
+  background-color: #ffcc00;
+  outline: none;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.futuristic-button:hover {
+  background-color: transparent;
+  color: black;
+}
+
+.abs {
+  position: absolute;
+  color: white;
+}
 
 /* animasi */
 .coin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50px;
     height: 50px;
     background-color: #ffee00; /* Warna biru futuristik */
@@ -85,3 +166,13 @@ article h1 {
       transform: scale(1.2);
     }
   }
+
+/* tampilan */
+/* @media screen and (max-width: 600px) {
+
+  .nav-links a {
+    display: none;
+
+  }
+
+} */
