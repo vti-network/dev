@@ -6,35 +6,158 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     <title>vti</title>
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px; /* Ganti dengan ukuran font yang diinginkan */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
-<body>
-    <div>
-    <h1><img src="./img/favicon-32x32.png" alt=""> VIT NETWORK</h1></div>
-    
-    <div class="flagID">
-        
-        <div class="coin"><br><span>VIP</span></div> 
-        <div class="coin"><br><span>TOKEN</span></div> 
-        <div class="coin"><br><span>IDN</span></div>
+<body >
+    <div class="container">
+
+        <header class="fixed-header">
+            <nav>
+                <div class="logo">
+                    <a href="#">VTI</a>
+                </div>
+                <ul class="nav-links">
+                        
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>                                      
+                </ul>
+            </nav>
+        </header>
+
+            <div class="input-container" >
+                <input type="text" value="txhast" class="futuristic-input" id="addressInput">
+                <button class="futuristic-button" onclick="fetchBalance()">Find</button>
+            </div>
+
+        <div class="flagID">
+            <div class="coin"></div> 
+            <div class="coin"></div> 
+            <div class="coin"></div> 
+            <div class="coin"></div> 
+            <div class="coin"></div> 
+            <div class="coin"></div> 
+            <div class="coin"></div> 
 
 
-    </div>
-    <div class="kotak">
-        <div class="art">
-        <article>
-        <h1>VTI</h1>
-        <p>adalah project token blockchain peer-to-peer, yang menangani pembuatan dan transfer aset secara efisien dari satu pihak ke pihak lain.</p>
-        </article>
-
-        <article>
-        <h1>BSC</h1>
-        <p>BEP-20 adalah standar token di Binance Smart Chain yang mengikuti spesifikasi ERC-20 di Ethereum.</p>
-        </article>            
+            <h1 class="abs">
+                V<span style="color: #f89604;">ip</span>
+                T<span style="color: #f89604;">oken</span>
+                I<span style="color: #f89604;">ndonesia</span>
+            </h1>  
+                
         </div>
 
-
-
+        <table id="transaksiTable">
+            <thead>
+                <tr>
+                    <th>D-Time</th>
+                    <th>A</th>
+                    <th>opt</th>
+                    <th>To</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="transaksiTableBody">
+                <!-- Data will be inserted here using JavaScript -->
+            </tbody>
+        </table>
     </div>
-    
 </body>
+<script>
+    function fetchBalance() {
+      // Get the input value
+      var address = document.getElementById("addressInput").value;
+
+      // Replace "YourApiKeyToken" with your actual BscScan API key
+      var apiKey = "GQUAEUCB8RZAIC6ARNU3NSQYNQUG8PDM7Y";
+
+      // BscScan API URL
+      var apiUrl = `https://api.bscscan.com/api?module=account&action=balance&address=${address}&apikey=${apiKey}`;
+
+      // Fetch data from BscScan API
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response data as needed
+          console.log(data);
+
+          // You can update your UI with the data, for example:
+          //alert(`Balance for ${address}: ${data.result}`);
+          updateTable(address, data.result);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    function updateTable(address, balance) {
+      var tableBody = document.querySelector("#resultTable tbody");
+      
+      // Clear previous results
+      tableBody.innerHTML = "";
+
+      // Create a new row
+      var newRow = tableBody.insertRow();
+
+      // Insert cells into the row
+      var addressCell = newRow.insertCell(0);
+      var balanceCell = newRow.insertCell(1);
+      var actionCell = newRow.insertCell(2);
+
+      // Populate cells with data
+      addressCell.textContent = address;
+      balanceCell.textContent = balance;
+      actionCell.innerHTML = `<button class="copy-button" onclick="copyAddress(this)">Copy Address</button>`;
+    }
+
+    function copyAddress(button) {
+      var addressToCopy = button.parentNode.parentNode.cells[0].textContent;
+      navigator.clipboard.writeText(addressToCopy)
+        .then(() => {
+          alert(`Address ${addressToCopy} copied to clipboard`);
+        })
+        .catch(err => {
+          console.error('Unable to copy address', err);
+        });
+    }
+  </script>
+
+
+<script>
+    // Read JSON data from file
+    fetch('./json/transaksi.json')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('transaksiTableBody');
+            data.forEach(transaction => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${transaction.datetime}</td>
+                    <td>${transaction.address}</td>
+                    <td>${transaction.s}</td>
+                    <td>${transaction.form}</td>
+                    <td>${transaction["s-t"]}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error reading JSON file:', error));
+</script>
 </html>
